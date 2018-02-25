@@ -1,5 +1,5 @@
 ﻿
-class Line0 extends XO {  // class line 0 coordinates: (0,0) , (0,1) , (0,2)
+class Line0 extends XO {  // class Line0 coordinates: (0,0) , (0,1) , (0,2)
 
     
     update(col: number, bool: boolean) {
