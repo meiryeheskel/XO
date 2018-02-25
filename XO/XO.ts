@@ -8,9 +8,9 @@ abstract class XO {
         this.counter = [0, 0];    // initialize the counters and count the number of O's in counter[0] and the number of X's in counter[1]   
         
     }
-      // 'update' abstract function makes sure that each inherited class will implement this function so that 'num' updates the position of the selection 
+      // 'update' abstract function makes sure that each inherited class will implement this function so that 'pos' updates the position of the selection 
       // in each class (either 0 , 1 or 2) and the selected object - 'True' for 'X' and 'False' for 'O'
-    abstract update(num:number, bool:boolean);   
+    abstract update(pos:number, bool:boolean);   
         
 }
 

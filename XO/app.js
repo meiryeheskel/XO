@@ -2,8 +2,27 @@
     Project #2: X-O
     by Meir Yeheskel
     course 91448/4
+
+
+    We will create an array of 8 objects out of the abstract class 'XO'.
+    Each object represents a possible winning streak - either 3 X's or 3 O's or a combination
+    Each object represents a different winning option:
+    Line0 - first line
+    Line1 - second line
+    line2 - third line
+    Col0  - first column
+    Col1  - second column
+    Col2  - third column
+    mainDiagonal - the main diagonal that goes from left to right
+    secondDiagonal - the second diagonal that goes from right to left
+
+    Each object has a boolean array of size 3 which represents the X's and the O's: 'True' represents 'X' , 'False' represents 'O', 'undefined' represents an empty cell.
+         for example: [T,F,undefined] represents: 'X' in the first place, 'O' in the second place and an empty cell in the third place.
+    Each object has a Number array of size 2 which represents - how many X's and O's are in the object.
+        for example: array[0]==2 means there are 2 O's in the object, array[1]==3 means there are 3 X's in the object.
+    Each time an object is invoked (with the 'update' function, it updates the boolean array with true/false and the counter array with the number of X's/O's)
 */
-var arr = new Array(new Line0, new Line1, new Line2, new Col0, new Col1, new Col2, new mainDiagonal, new secondDiagonal); // class XO explined in XO.ts
+var arr = new Array(new Line0, new Line1, new Line2, new Col0, new Col1, new Col2, new mainDiagonal, new secondDiagonal); // class XO explained in XO.ts
 var matrixDimension = 3; // matrix dimension is 3
 var mat = new Array(matrixDimension); // create a matrix 3X3 of type string
 var i, j, num, index, turns = 1; // 'i' and 'j' are global variables which represent the row(i) and column(j)
@@ -38,16 +57,16 @@ function nextTurn() {
     updateObjects(true); // update the relevant objects with "True" - representing player X's
     for (index = 0; index < arr.length; index++)
         if (arr[index].counter[1] == 3) {
-            alert("Player wins!\n\nClick 'OK' to see the winning series");
+            alert("Player wins!\n\nClick 'OK' to see the winning streak");
             var element = document.getElementsByTagName("button");
-            element[0].setAttribute("disabled", "disabled");
+            element[0].setAttribute("disabled", "disabled"); // disable the 'Play' button
             break;
         }
     if (index == arr.length) {
         if (turns++ > 4) {
-            alert("It's a draw!");
+            alert("It's a draw!\n\nClick 'OK' to see the draw");
             var element = document.getElementsByTagName("button");
-            element[0].setAttribute("disabled", "disabled");
+            element[0].setAttribute("disabled", "disabled"); // disable the 'Play' button
         }
         else
             playXO();
@@ -100,9 +119,9 @@ function playXO() {
     for (var i_3 = 0; i_3 < Math.pow(9, 4); i_3++)
         Print(mat);
     if (arr[index - 1].counter[0] == 3) {
-        alert("Computer wins!\n\nClick 'OK' to see the winning series");
+        alert("Computer wins!\n\nClick 'OK' to see the winning streak");
         var element = document.getElementsByTagName("button");
-        element[0].setAttribute("disabled", "disabled");
+        element[0].setAttribute("disabled", "disabled"); // disable the 'Play' button
     }
 }
 function findEmptyCell(index, pos) {

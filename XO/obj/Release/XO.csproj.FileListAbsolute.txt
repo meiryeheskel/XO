@@ -1,0 +1,6 @@
+C:\Users\Meir\source\repos\XO\XO\bin\TypeScriptHTMLApp1.dll.config
+C:\Users\Meir\source\repos\XO\XO\bin\TypeScriptHTMLApp1.dll
+C:\Users\Meir\source\repos\XO\XO\bin\TypeScriptHTMLApp1.pdb
+C:\Users\Meir\source\repos\XO\XO\obj\Release\XO.csproj.CoreCompileInputs.cache
+C:\Users\Meir\source\repos\XO\XO\obj\Release\TypeScriptHTMLApp1.dll
+C:\Users\Meir\source\repos\XO\XO\obj\Release\TypeScriptHTMLApp1.pdb

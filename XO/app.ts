@@ -3,9 +3,28 @@
     Project #2: X-O
     by Meir Yeheskel
     course 91448/4      
+
+
+    We will create an array of 8 objects out of the abstract class 'XO'.
+    Each object represents a possible winning streak - either 3 X's or 3 O's or a combination
+    Each object represents a different winning option:
+    Line0 - first line
+    Line1 - second line
+    line2 - third line
+    Col0  - first column
+    Col1  - second column
+    Col2  - third column
+    mainDiagonal - the main diagonal that goes from left to right
+    secondDiagonal - the second diagonal that goes from right to left
+
+    Each object has a boolean array of size 3 which represents the X's and the O's: 'True' represents 'X' , 'False' represents 'O', 'undefined' represents an empty cell.
+         for example: [T,F,undefined] represents: 'X' in the first place, 'O' in the second place and an empty cell in the third place.
+    Each object has a Number array of size 2 which represents - how many X's and O's are in the object. 
+        for example: array[0]==2 means there are 2 O's in the object, array[1]==3 means there are 3 X's in the object.
+    Each time an object is invoked (with the 'update' function, it updates the boolean array with true/false and the counter array with the number of X's/O's)
 */
-     
-let arr: XO[] = new Array<XO>(new Line0, new Line1, new Line2, new Col0, new Col1, new Col2, new mainDiagonal, new secondDiagonal); // class XO explined in XO.ts
+
+let arr: XO[] = new Array<XO>(new Line0, new Line1, new Line2, new Col0, new Col1, new Col2, new mainDiagonal, new secondDiagonal); // class XO explained in XO.ts
 let matrixDimension = 3;                                                 // matrix dimension is 3
 let mat: string[][] = new Array<Array<string>>(matrixDimension);         // create a matrix 3X3 of type string
 let i: number, j: number, num: number, index: number, turns: number = 1; // 'i' and 'j' are global variables which represent the row(i) and column(j)
@@ -47,16 +66,16 @@ function nextTurn() {
     for (index = 0; index < arr.length; index++)     // check whether the player won
         if (arr[index].counter[1] == 3)
         {     
-        alert("Player wins!\n\nClick 'OK' to see the winning series");
-        let element = document.getElementsByTagName("button");
-        element[0].setAttribute("disabled", "disabled");
+        alert("Player wins!\n\nClick 'OK' to see the winning streak");
+        let element = document.getElementsByTagName("button");  
+        element[0].setAttribute("disabled", "disabled");    // disable the 'Play' button
         break;
         } 
-    if (index == arr.length) { // if no winning series detected (for loop exits with index==arr.length) continue playing with the computer (unless it's a draw)
+    if (index == arr.length) { // if no winning streak detected (for loop exits with index==arr.length) continue playing with the computer (unless it's a draw)
         if (turns++ > 4) {          // if it's the 5th turn then it must be a draw
-            alert("It's a draw!");
+            alert("It's a draw!\n\nClick 'OK' to see the draw");
             let element = document.getElementsByTagName("button");
-            element[0].setAttribute("disabled", "disabled");
+            element[0].setAttribute("disabled", "disabled");    // disable the 'Play' button
         } else playXO();  
 
     }
@@ -81,9 +100,9 @@ function updateObjects(bool:boolean): void {
 function playXO(): void {
     let flag: boolean = false;  // flag turns 'true' when either the computer wins or the computer blocks the user, so that a random number will be selected 
     for (index = 0; index < arr.length && !flag; index++) 
-        if (arr[index].counter[0] == 2 && arr[index].counter[1] == 0) // computer found a winning 3 O's
+        if (arr[index].counter[0] == 2 && arr[index].counter[1] == 0) // computer found 2 O's and no X's , so we have an empty cell for a winning 3 O's
         {
-            for (let pos: number = 0; pos < matrixDimension; pos++)  // search the empty cell to win the game
+            for (let pos: number = 0; pos < matrixDimension; pos++)  // search the for empty cell to win the game
                 if (arr[index].position[pos] == undefined) {
                     findEmptyCell(index, pos);  // the function will update the global variables - i and j of the empty cell
                     mat[i][j] = "O"; //  computer wins
@@ -93,9 +112,9 @@ function playXO(): void {
         }
 
         for (let index: number = 0; index < arr.length && !flag; index++)
-            if (arr[index].counter[1] == 2 && arr[index].counter[0] == 0)  // computer blocks the user
+            if (arr[index].counter[1] == 2 && arr[index].counter[0] == 0)  // computer found 2 X's and no O's , so it will block the player 
             {
-                for (let pos: number = 0; pos < matrixDimension; pos++) // search the empty cell to block the user
+                for (let pos: number = 0; pos < matrixDimension; pos++) // search for the empty cell to block the user
                     if (arr[index].position[pos] == undefined) {
                         findEmptyCell(index, pos);
                         mat[i][j] = "O";
@@ -105,7 +124,7 @@ function playXO(): void {
 
             }
 
-        if (!flag) {
+        if (!flag) {    // if computer hasn't won and hasn't blocked the player - draw a random number for a cell that's not taken already
             do {
                 num = Math.round(Math.random() * 8); // computer selects a random number between 0-8 thats not already taken
             } while (!isAvailable(num));
@@ -115,14 +134,13 @@ function playXO(): void {
         for (let i: number = 0; i < Math.pow(9, 4); i++)    // wait while displaying the matrix (visual effect only)
             Print(mat); 
 
-        if (arr[index-1].counter[0] == 3) {  // check whether the computer won, we already know that 'flag' threw us if 2 O's were detected so 'index-1' is the index of the object of the winning series
-            alert("Computer wins!\n\nClick 'OK' to see the winning series");
+        if (arr[index-1].counter[0] == 3) {  // check whether the computer won, we already know that 'flag' threw us with 3 O's so 'index-1' is the index of the object of the winning streak
+            alert("Computer wins!\n\nClick 'OK' to see the winning streak");
             let element = document.getElementsByTagName("button");
-            element[0].setAttribute("disabled", "disabled");
+            element[0].setAttribute("disabled", "disabled");    // disable the 'Play' button
         }
 
 }
-
 
 function findEmptyCell(index: number,pos:number): void {    // assign to the global variables i and j the correct coordinates of the empty cell
     switch (index) {
@@ -144,7 +162,7 @@ function Print(mat: Array<Array<string>>) {
     for (let i: number = 0; i < mat.length; i++) {
         tempstr += "-------------<br/>";
         for (let j: number = 0; j < mat[i].length; j++) {
-            tempstr += `${j?" ":"| "} ${mat[i][j]} |`;
+            tempstr += `${j ? " " : "| "} ${mat[i][j]} |`; 
         }
         tempstr += "<br/>";
     }
