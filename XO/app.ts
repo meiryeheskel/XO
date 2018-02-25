@@ -67,15 +67,13 @@ function nextTurn() {
         if (arr[index].counter[1] == 3)
         {     
         alert("Player wins!\n\nClick 'OK' to see the winning streak");
-        let element = document.getElementsByTagName("button");  
-        element[0].setAttribute("disabled", "disabled");    // disable the 'Play' button
+        disablePlayButton();
         break;
         } 
     if (index == arr.length) { // if no winning streak detected (for loop exits with index==arr.length) continue playing with the computer (unless it's a draw)
         if (turns++ > 4) {          // if it's the 5th turn then it must be a draw
             alert("It's a draw!\n\nClick 'OK' to see the draw");
-            let element = document.getElementsByTagName("button");
-            element[0].setAttribute("disabled", "disabled");    // disable the 'Play' button
+            disablePlayButton();
         } else playXO();  
 
     }
@@ -135,10 +133,14 @@ function playXO(): void {
 
         if (arr[index-1].counter[0] == 3) {  // check whether the computer won, we already know that 'flag' threw us with 3 O's so 'index-1' is the index of the object of the winning streak
             alert("Computer wins!\n\nClick 'OK' to see the winning streak");
-            let element = document.getElementsByTagName("button");
-            element[0].setAttribute("disabled", "disabled");    // disable the 'Play' button
+            disablePlayButton();
         }
 
+}
+
+function disablePlayButton(): void {                         // disable the 'Play' button
+    let element = document.getElementsByTagName("button");
+    element[0].setAttribute("disabled", "disabled");    
 }
 
 function findEmptyCell(index: number,pos:number): void {    // assign to the global variables i and j the correct coordinates of the empty cell

@@ -58,15 +58,13 @@ function nextTurn() {
     for (index = 0; index < arr.length; index++)
         if (arr[index].counter[1] == 3) {
             alert("Player wins!\n\nClick 'OK' to see the winning streak");
-            var element = document.getElementsByTagName("button");
-            element[0].setAttribute("disabled", "disabled"); // disable the 'Play' button
+            disablePlayButton();
             break;
         }
     if (index == arr.length) {
         if (turns++ > 4) {
             alert("It's a draw!\n\nClick 'OK' to see the draw");
-            var element = document.getElementsByTagName("button");
-            element[0].setAttribute("disabled", "disabled"); // disable the 'Play' button
+            disablePlayButton();
         }
         else
             playXO();
@@ -119,9 +117,12 @@ function playXO() {
     Print(mat);
     if (arr[index - 1].counter[0] == 3) {
         alert("Computer wins!\n\nClick 'OK' to see the winning streak");
-        var element = document.getElementsByTagName("button");
-        element[0].setAttribute("disabled", "disabled"); // disable the 'Play' button
+        disablePlayButton();
     }
+}
+function disablePlayButton() {
+    var element = document.getElementsByTagName("button");
+    element[0].setAttribute("disabled", "disabled");
 }
 function findEmptyCell(index, pos) {
     switch (index) {
