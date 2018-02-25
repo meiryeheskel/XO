@@ -88,7 +88,7 @@ function updateObjects(bool) {
         arr[matrixDimension * 2 + 1].update(i, bool); // if selection is on secondary diagonal - update position(i)
 }
 function playXO() {
-    var flag = false; // flag turns 'true' when either the computer wins or the computer blocks the user, so that a random number will be selected 
+    var flag = false; // flag turns 'true' when either the computer wins or the computer blocks the user, otherwise a random number will be selected 
     for (index = 0; index < arr.length && !flag; index++)
         if (arr[index].counter[0] == 2 && arr[index].counter[1] == 0) {
             for (var pos = 0; pos < matrixDimension; pos++)
@@ -116,8 +116,7 @@ function playXO() {
         mat[i][j] = "O";
     }
     updateObjects(false); // update the relevant objects with "False" - representing computer O's
-    for (var i_3 = 0; i_3 < Math.pow(9, 4); i_3++)
-        Print(mat);
+    Print(mat);
     if (arr[index - 1].counter[0] == 3) {
         alert("Computer wins!\n\nClick 'OK' to see the winning streak");
         var element = document.getElementsByTagName("button");
@@ -149,10 +148,10 @@ function findEmptyCell(index, pos) {
 }
 function Print(mat) {
     var tempstr = "";
-    for (var i_4 = 0; i_4 < mat.length; i_4++) {
+    for (var i_3 = 0; i_3 < mat.length; i_3++) {
         tempstr += "-------------<br/>";
-        for (var j_2 = 0; j_2 < mat[i_4].length; j_2++) {
-            tempstr += (j_2 ? " " : "| ") + " " + mat[i_4][j_2] + " |";
+        for (var j_2 = 0; j_2 < mat[i_3].length; j_2++) {
+            tempstr += (j_2 ? " " : "| ") + " " + mat[i_3][j_2] + " |";
         }
         tempstr += "<br/>";
     }

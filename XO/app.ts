@@ -98,7 +98,7 @@ function updateObjects(bool:boolean): void {
 }
 
 function playXO(): void {
-    let flag: boolean = false;  // flag turns 'true' when either the computer wins or the computer blocks the user, so that a random number will be selected 
+    let flag: boolean = false;  // flag turns 'true' when either the computer wins or the computer blocks the user, otherwise a random number will be selected 
     for (index = 0; index < arr.length && !flag; index++) 
         if (arr[index].counter[0] == 2 && arr[index].counter[1] == 0) // computer found 2 O's and no X's , so we have an empty cell for a winning 3 O's
         {
@@ -131,8 +131,7 @@ function playXO(): void {
             mat[i][j] = "O";
         }
         updateObjects(false); // update the relevant objects with "False" - representing computer O's
-        for (let i: number = 0; i < Math.pow(9, 4); i++)    // wait while displaying the matrix (visual effect only)
-            Print(mat); 
+        Print(mat); 
 
         if (arr[index-1].counter[0] == 3) {  // check whether the computer won, we already know that 'flag' threw us with 3 O's so 'index-1' is the index of the object of the winning streak
             alert("Computer wins!\n\nClick 'OK' to see the winning streak");
@@ -146,7 +145,7 @@ function findEmptyCell(index: number,pos:number): void {    // assign to the glo
     switch (index) {
         case 0:
         case 1:
-        case 2: i = index; j = pos; break;
+        case 2: i = index; j = pos; break; 
         case 3:
         case 4:
         case 5: i = pos; j = index % 3; break;
