@@ -8,20 +8,21 @@
     We will create an array of 8 objects out of the abstract class 'XO'.
     Each object represents a possible winning streak - either 3 X's or 3 O's or a combination
     Each object represents a different winning option:
-    Line0 - first line
-    Line1 - second line
-    line2 - third line
-    Col0  - first column
-    Col1  - second column
-    Col2  - third column
-    mainDiagonal - the main diagonal that goes from left to right
-    secondDiagonal - the second diagonal that goes from right to left
+    Line0 - first line      (index in array -> 0)
+    Line1 - second line     (index in array -> 1)
+    line2 - third line      (index in array -> 2)
+    Col0  - first column    (index in array -> matrix dimension + 0)
+    Col1  - second column   (index in array -> matrix dimension + 1)
+    Col2  - third column    (index in array -> matrix dimension + 2)
+    mainDiagonal - the main diagonal that goes from left to right       (index in array -> matrix dimension + matrix dimension)
+    secondDiagonal - the second diagonal that goes from right to left   (index in array -> matrix dimension + matrix dimension + 1)
 
     Each object has a boolean array of size 3 which represents the X's and the O's: 'True' represents 'X' , 'False' represents 'O', 'undefined' represents an empty cell.
          for example: [T,F,undefined] represents: 'X' in the first place, 'O' in the second place and an empty cell in the third place.
     Each object has a Number array of size 2 which represents - how many X's and O's are in the object. 
         for example: array[0]==2 means there are 2 O's in the object, array[1]==3 means there are 3 X's in the object.
     Each time an object is invoked (with the 'update' function, it updates the boolean array with true/false and the counter array with the number of X's/O's)
+    
 */
 
 let arr: XO[] = new Array<XO>(new Line0, new Line1, new Line2, new Col0, new Col1, new Col2, new mainDiagonal, new secondDiagonal); // class XO explained in XO.ts
@@ -100,12 +101,13 @@ function playXO(): void {
     for (index = 0; index < arr.length && !flag; index++) 
         if (arr[index].counter[0] == 2 && arr[index].counter[1] == 0) // computer found 2 O's and no X's , so we have an empty cell for a winning 3 O's
         {
-            for (let pos: number = 0; pos < matrixDimension; pos++)  // search the for empty cell to win the game
+            for (let pos: number = 0; pos < matrixDimension; pos++)  // search the for the empty cell to win the game
                 if (arr[index].position[pos] == undefined) {
                     findEmptyCell(index, pos);  // the function will update the global variables - i and j of the empty cell
                     mat[i][j] = "O"; //  computer wins
                     arr[index].position[pos] = false;
                     flag = true;
+                    break;
                 }
         }
 
@@ -118,6 +120,7 @@ function playXO(): void {
                         mat[i][j] = "O";
                         arr[index].position[pos] = false;
                         flag = true;
+                        break;
                     }
 
             }
